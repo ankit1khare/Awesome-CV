@@ -7,3 +7,5 @@ Used Awesome-CV template for building my resume.
   <br />
   Awesome CV
 </h1>
+
+For downloading my resume, click [here](https://aekhz.com/Resume_AnkitKhare.pdf)
