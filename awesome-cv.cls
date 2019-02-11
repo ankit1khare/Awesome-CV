@@ -48,6 +48,13 @@
 %-------------------------------------------------------------------------------
 % Needed to make fixed length table
 \RequirePackage{array}
+\RequirePackage{xspace}
+
+\newcommand\nd{\textsuperscript{nd}\xspace}
+\newcommand\rd{\textsuperscript{rd}\xspace}
+\newcommand\nth{\textsuperscript{th}\xspace}
+\newcommand\st{\textsuperscript{st}\xspace}
+
 % Needed to handle list environment
 \RequirePackage{enumitem}
 % Needed to handle text alignment
@@ -86,9 +93,14 @@
   pdftitle={},
   pdfauthor={},
   pdfsubject={},
-  pdfkeywords={}
+  pdfkeywords={},
+  urlcolor=brown,
+  linkcolor=red,          % color of internal links (change box color with linkbordercolor)
+  citecolor=green,        % color of links to bibliography
+  filecolor=magenta,
+  colorlinks=true 
 }
-
+ 
 
 %-------------------------------------------------------------------------------
 %                Configuration for directory locations
@@ -103,7 +115,7 @@
 %-------------------------------------------------------------------------------
 %% Page Layout
 % Configure page margins with geometry
-\geometry{left=2.0cm, top=1.5cm, right=2.0cm, bottom=2.0cm, footskip=.5cm}
+%\geometry{left=2.0cm, top=1.5cm, right=2.0cm, bottom=1.0cm, footskip=.5cm}
 
 %% Header & Footer
 % Set offset to each header and footer
@@ -193,7 +205,7 @@
 \newcommand*{\headerpositionstyle}[1]{{\fontsize{7.6pt}{1em}\bodyfont\scshape\color{awesome} #1}}
 \newcommand*{\headeraddressstyle}[1]{{\fontsize{8pt}{1em}\headerfont\itshape\color{lighttext} #1}}
 \newcommand*{\headersocialstyle}[1]{{\fontsize{6.8pt}{1em}\headerfont\color{text} #1}}
-\newcommand*{\headerquotestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\itshape\color{darktext} #1}}
+\newcommand*{\headerquotestyle}[1]{{\fontsize{9pt}{0em}\bodyfont\itshape\color{darktext} #1}}
 \newcommand*{\footerstyle}[1]{{\fontsize{8pt}{1em}\footerfont\scshape\color{lighttext} #1}}
 \newcommand*{\sectionstyle}[1]{{\fontsize{16pt}{1em}\bodyfont\bfseries\color{text}\@sectioncolor #1}}
 \newcommand*{\subsectionstyle}[1]{{\fontsize{12pt}{1em}\bodyfont\scshape\textcolor{text}{#1}}}
@@ -239,7 +251,7 @@
 %-------------------------------------------------------------------------------
 % Define photo ID
 % Usage: \photo[circle|rectangle,edge|noedge,left|right]{<path-to-image>}
-\newcommand{\photo}[2][circle,edge,left]{%
+\newcommand{\photo}[2][rectangle,edge,left]{%
   \def\@photo{#2}
   \@for\tmp:=#1\do{%
     \ifthenelse{\equal{\tmp}{circle} \or \equal{\tmp}{rectangle}}%
@@ -303,7 +315,6 @@
 % Usage: \linkedin{<linked-in-nick>}
 \newcommand*{\linkedin}[1]{\def\@linkedin{#1}}
 
-% Defines writer's twitter (optional)
 % Usage: \twitter{<twitter handle>}
 \newcommand*{\twitter}[1]{\def\@twitter{#1}}
 
@@ -319,25 +330,7 @@
 % Usage: \xing{<xing name>}
 \newcommand*{\xing}[1]{\def\@xing{#1}}
 
-% Defines writer's medium profile (optional)
-% Usage: \medium{<medium account>}
-\newcommand*{\medium}[1]{\def\@medium{#1}}
-
-% Defines writer's google scholar profile (optional)
-% Usage: \googlescholar{<googlescholar userid>}{<googlescholar username>}
-% e.g.https://scholar.google.co.uk/citations?user=wpZDx1cAAAAJ
-% would be \googlescholar{wpZDx1cAAAAJ}{Name-to-display-next-icon}
-% If 'googlescholar-name' is not provided than it defaults to
-% '\firstname \lastname'
-\newcommand*{\googlescholar}[2]{%
-  \def\@googlescholarid{#1}%
-  \ifthenelse{\equal{#2}{}}{%
-    \def\@googlescholarname{\@firstname~\@lastname}%
-  }{%
-    \def\@googlescholarname{#2}%
-  }%
-}
-
+% Defines writer's twitter (optional)
 % Defines writer's extra informations (optional)
 % Usage: \extrainfo{<extra informations>}
 \newcommand*{\extrainfo}[1]{\def\@extrainfo{#1}}
@@ -391,12 +384,12 @@
 \newcommand{\acvHeaderAfterAddressSkip}{-.5mm}
 \newcommand{\acvHeaderIconSep}{\space}
 \newcommand{\acvHeaderSocialSep}{\quad\textbar\quad}
-\newcommand{\acvHeaderAfterSocialSkip}{6mm}
-\newcommand{\acvHeaderAfterQuoteSkip}{5mm}
+\newcommand{\acvHeaderAfterSocialSkip}{3mm}
+\newcommand{\acvHeaderAfterQuoteSkip}{3mm}
 
 % Others
-\newcommand{\acvSectionTopSkip}{3mm}
-\newcommand{\acvSectionContentTopSkip}{2.5mm}
+\newcommand{\acvSectionTopSkip}{1mm} %spaces between 2 diff sections
+\newcommand{\acvSectionContentTopSkip}{0mm}
 
 
 %-------------------------------------------------------------------------------
@@ -424,8 +417,8 @@
     \ifthenelse{\isundefined{\@photo}}{}{%
       \newlength{\photodim}
       \ifthenelse{\equal{\@photoshape}{circle}}%
-        {\setlength{\photodim}{1.3cm}}%
-        {\setlength{\photodim}{1.8cm}}%
+        {\setlength{\photodim}{1.0cm}}%
+        {\setlength{\photodim}{1.5cm}}%
       \ifthenelse{\equal{\@photoedge}{edge}}%
         {\def\@photoborder{darkgray}}%
         {\def\@photoborder{none}}%
@@ -440,8 +433,8 @@
     \setlength{\headertextwidth}{\textwidth}
     \setlength{\headerphotowidth}{0cm}
   }{%
-    \setlength{\headertextwidth}{0.76\textwidth}
-    \setlength{\headerphotowidth}{0.24\textwidth}
+    \setlength{\headertextwidth}{0.69\textwidth} %header proportions photo and text
+    \setlength{\headerphotowidth}{0.16\textwidth}
   }%
   \begin{minipage}[c]{\headerphotowidth}%
     \ifthenelse{\equal{\@photoalign}{left}}{\raggedright\drawphoto}{}
@@ -458,9 +451,15 @@
       \ifthenelse{\isundefined{\@mobile}}%
         {}%
         {%
-          \faMobile\acvHeaderIconSep\@mobile%
-          \setbool{isstart}{false}%
-        }%
+		  \ifbool{isstart}{\setbool{isstart}{false}}
+{\acvHeaderSocialSep}%
+		  \href{tel:\@mobile}{\faEnvelope\acvHeaderIconSep\@mobile}%
+        }% 
+%		  {\          
+%          \faMobile\acvHeaderIconSep\@mobile%
+%          \setbool{isstart}{false}%
+%          \color{brown}
+%        }%
       \ifthenelse{\isundefined{\@email}}%
         {}%
         {%
@@ -520,18 +519,6 @@
         {%
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
           \href{https://www.xing.com/profile/\@xing}{\faXingSquare\acvHeaderIconSep\@xing}
-        }%
-      \ifthenelse{\isundefined{\@medium}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://medium.com/@\@medium}{\faMedium\acvHeaderIconSep\@medium}%
-        }%
-      \ifthenelse{\isundefined{\@googlescholarid}}%
-        {}%
-        {%
-          \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://scholar.google.com/citations?user=\@googlescholarid}{\faGraduationCap\acvHeaderIconSep\@googlescholarname}%
         }%
       \ifthenelse{\isundefined{\@extrainfo}}%
         {}%
@@ -657,7 +644,7 @@
   \begin{center}
     \setlength\tabcolsep{1ex}
     \setlength{\extrarowheight}{0pt}
-    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} r L{\textwidth * \real{0.9}}}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} r L{\textwidth * \real{0.8}}}
 }{%
     \end{tabular*}
   \end{center}
@@ -723,7 +710,7 @@
 % Usage: \makeletterclosing
 \newcommand*{\makeletterclosing}{%
   \vspace{3.4mm}
-  \lettertextstyle{\@letterclosing} \\\\
+  \lettertextstyle{\@letterclosing \vspace*{0.07in}} \\ 
   \letternamestyle{\@firstname\ \@lastname}
   \ifthenelse{\isundefined{\@letterenclosure}}
     {\\}
