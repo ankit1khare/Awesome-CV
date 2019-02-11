@@ -10,4 +10,4 @@ Used Awesome-CV template for building my resume.
 
 For downloading my resume, please click [here](https://aekhz.com/Resume_AnkitKhare.pdf)
 
-// ss
+# ss
