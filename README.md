@@ -8,4 +8,4 @@ Used Awesome-CV template for building my resume.
   Awesome CV
 </h1>
 
-For downloading my resume, please click <a href="https://aekhz.com/Resume_AnkitKhare.pdf/" target="_blank">here</a>
+For downloading my resume, please click <a href="https://aekhz.com/Resume_AnkitKhare.pdf" target="_blank"> here </a>
